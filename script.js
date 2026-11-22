@@ -1,11 +1,11 @@
-/* Ledger Balance System
+//Ledger Balance System  // replace /* to //
 
-const User = require('./user.js')
+import { User } from './user.js'; //change to import
 
-const person = new User("Bin Rashid", "Muhamad Abu Bakar");
+const person = new User("Muhamad Abu Bakar", "Bin Rashid"); //switch places for firstName and lastName
 
 const greeting = document.getElementById("greeting");
-greeting.textContent = `Welcome, ${person.fullname?.lastName}!`;
+greeting.textContent = `Welcome, ${person.fullname}!`;  //remove ?.lastName
 
 const expenses = ["food", "rent", "others", "saving"];
 
