@@ -19,12 +19,11 @@ function calculate() {
   }
 
   const balance = salary - total;
-  const percent = (balance / salary) * 100;
-
+  const percent = salary < 0 ? (balance / salary) * 100 : 0;  //if salary is 0, prevent percent from -NaN or -infinity
+  const amount = balance < 0 ? `-RM${Math.abs(balance)}` : `RM${balance}`;  //show minus sign after RM. Math.abs removes minus from number
+  
   const result = document.getElementById("result");
-  result.textContent = `Net Balance: $${balance} (${
-    percent.toFixed(1) + '%'
-  } of income)`;
+  result.textContent = `Net Balance: ${amount} (${percent.toFixed(2) + '%'} of income)`; //change balance to amount, toFixed(1) to toFixed(2)
 
   result.style.backgroundColor = balance >= 0 ? "#d4edda" : "#f8d7da";
   result.style.color = balance >= 0 ? "#155724" : "#721c24";
