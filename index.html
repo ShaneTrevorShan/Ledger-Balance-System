@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ledger Balance System</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css"> <!--syntax err: styles.css to style.css-->
 </head>
 <body>
   <div class="container">
-    <img src="ledgerr.png" alt="Ledger Header">
-    <h1>Legsgar Balance System</h1>
+    <img src="ledgerr.png" alt="Ledger Header"> <!--syntax err: ledgerr.png to ledger.png-->
+    <h1>Legsgar Balance System</h1>  <!-- spelling error: Legsgar to Ledger-->
     <p id="greeting"></p>
     <div class="form">
       <label>Salary:       <input type="number" id="salary" placeholder="0"></label>
@@ -18,9 +18,11 @@
       <label>Others:       <input type="number" id="others" placeholder="0"></label>
       <label>Saving Goal:  <input type="number" id="saving" placeholder="0"></label>
     </div>
-    <button>Calculate Balance</button>
+    <button onclick="calculate()">Calculate Balance</button>  <!-- missing event handler（onclick): button not connected to function -->
     <div id="result" class="result"></div>
   </div>
+
+  <script src="user.js"></script> <!-- missing module to import user's name-->
   <script src="script.js"></script>
 </body>
 </html>
