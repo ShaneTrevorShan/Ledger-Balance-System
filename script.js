@@ -29,3 +29,4 @@ function calculate() {
   result.style.backgroundColor = balance >= 0 ? "#d4edda" : "#f8d7da";
   result.style.color = balance >= 0 ? "#155724" : "#721c24";
 }
+document.getElementById("calc-btn").addEventListener("click", calculate); //add event listener for calculate button in index.html
