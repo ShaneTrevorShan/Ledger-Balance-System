@@ -5,8 +5,8 @@ class User {
   }
 
   get fullname() {
-    return `${firstName} ${lastName}`;
+    return `${this.firstName} ${this.lastName}`; // reference err: missing this. 
   }
 }
 
-module.exports = User;
+module.exports = User; 
