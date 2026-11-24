@@ -43,7 +43,7 @@ function calculate() {
 
   rows.push({
     label: balance >= 0 ? "Remaining" : "Overspent",
-    amount: Math.abs(balance),
+    amount: balance,
     color: balance >= 0 ? "lightgreen" : "salmon",
   });
 
