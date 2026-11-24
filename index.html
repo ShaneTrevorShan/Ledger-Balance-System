@@ -1,27 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ledger Balance System</title>
-  <link rel="stylesheet" href="style.css"> <!--syntax err: styles.css to style.css-->
-</head>
-<body>
-  <div class="container">
-    <img src="ledger.png" alt="Ledger Header"> <!--syntax err: ledgerr.png to ledger.png-->
-    <h1>Ledger Balance System</h1>  <!-- spelling error: Legsgar to Ledger-->
-    <p id="greeting"></p>
-    <div class="form">
-      <label>Salary:       <input type="number" id="salary" placeholder="0"></label>
-      <label>Food:         <input type="number" id="food" placeholder="0"></label>
-      <label>Rent:         <input type="number" id="rent" placeholder="0"></label>
-      <label>Others:       <input type="number" id="others" placeholder="0"></label>
-      <label>Saving Goal:  <input type="number" id="saving" placeholder="0"></label>
-    </div>
-    <button id="calc-btn">Calculate Balance</button>  <!-- missing event handler（calc-btn): button not connected to function -->
-    <div id="result" class="result"></div>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ledger Balance System</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="Money Cat.png" type="image/png" />
+  </head>
+  <body>
+    <div class="ledger-title">
+      <img class="header-img d-block mx-auto rounded mb-4" src="ledger.png" alt="Ledger Header" />
+      <h1>Money Pit</h1>
+      <p id="greeting"></p>
 
-  <script type="module" src="script.js"></script>
-</body>
+      <div class="d-flex justify-content-end align-text-center gap-2">
+        <label for="currency" class="my-2">Show currency in: </label>
+        <select id="currency" class="form-select w-auto">
+          <option value="MYR">MYR (RM)</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+      
+      <div class="form">
+        <label
+          >Salary: <input type="number" min="0" id="salary" placeholder="0"
+        /></label>
+        <label>Food: <input type="number" min="0" id="food" placeholder="0" /></label>
+        <label>Rent: <input type="number" min="0" id="rent" placeholder="0" /></label>
+        <label
+          >Others: <input type="number" min="0" id="others" placeholder="0"
+        /></label>
+        <label
+          >Saving Goal: <input type="number" min="0" id="saving" placeholder="0"
+        /></label>
+      </div>
+
+      <button id="calc-btn">Calculate Balance</button>
+      <div id="result" class="result"></div>
+
+      <div class="table-container">
+        <table class="table-ledger">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Amount</th>
+              <th>Share of Salary</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <script src="table.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
