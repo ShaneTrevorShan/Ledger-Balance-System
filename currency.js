@@ -7,7 +7,7 @@ async function loadRates() {
         const data = await response.json();
         rates = { MYR: 1, ...data.rates };
     } catch (error){
-        console.log("Could not load exchange rates: ", err);
+        console.log("Could not load exchange rates: ", error);
     }
 }
 
