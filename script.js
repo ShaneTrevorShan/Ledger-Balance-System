@@ -1,6 +1,7 @@
 //Ledger Balance System  
 
 import { User } from "./user.js";
+import { currency, rates, loadRates, money, setCurrency } from "./currency.js";
 
 const firstName = prompt("Please enter your first name: ") || "Future";
 const lastName = prompt("Please enter your last name: ") || "Millionare";
@@ -20,7 +21,7 @@ const colors = {
 
 function calculate() {
   const salary = Number(document.getElementById("salary").value) || 0;
-
+  
   let total = 0;
   let rows = [];
 
@@ -37,7 +38,7 @@ function calculate() {
   }
 
   const balance = salary - total;
-  const percent = (balance / salary) * 100;
+  const percent = salary > 0 ? (balance / salary) * 100 : 0;
   const amount = balance < 0 ? `-RM${Math.abs(balance).toFixed(2)}` : `RM${Math.abs(balance).toFixed(2)}`
 
   rows.push({
@@ -49,7 +50,7 @@ function calculate() {
   drawTable(rows, salary);
 
   const result = document.getElementById("result");
-  result.textContent = `Net Balance: ${amount} (${
+  result.textContent = `Net Balance: ${(money(balance))} (${
     percent.toFixed(2) + "%"
   } of income)`;
   result.style.backgroundColor = balance >= 0 ? "#d4edda" : "#f8d7da";
@@ -75,11 +76,11 @@ function drawTable(rows, salary) {
     html += `
       <tr>
         <td>${row.label}</td>
-        <td><span id=currency"></span>${(row.amount)}</td>
+        <td>${(money(row.amount))}</td>
         <td>
           <div class="bar-track">
             <div class="bar-fill" style="width: ${barWidth}%; background-color: ${row.color};"></div>
-            <span class="bar-text">${percent.toFixed(1)}%</span>         
+            <span class="bar-text">${percent.toFixed(2)}%</span>         
           </div>
         </td>
       </tr>  
@@ -88,3 +89,30 @@ function drawTable(rows, salary) {
   tbody.innerHTML = html;
 }
 
+document.getElementById("currency").addEventListener("change", (event) => {
+  const oldCode = currency;
+  const newCode = event.target.value;
+  
+  if (!rates[oldCode] || !rates[newCode]){
+    event.target.value = oldCode;
+    alert("Exchange rates not available right now.");
+    return;
+  }
+
+  const conversion = rates[newCode] / rates[oldCode];
+
+  const ids = ["salary", ...expenses];
+
+  for (const id of ids){
+    const input = document.getElementById(id);
+    if (input.value !== ""){
+      input.value = (Number(input.value) * conversion).toFixed(2);
+      console.log("currency converted", rates[oldCode], "to", rates[newCode] )
+    }
+  }
+  setCurrency(newCode);
+  console.log("currency set?", newCode)
+  calculate();
+});
+loadRates().then(calculate)
+console.log("rates ok?", loadRates, "then", calculate)
